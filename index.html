@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script src="http://s.phono.com/releases/0.6/jquery.phono.js"></script>
+  </head>
+  <body bgcolor="#000000" link="#FFFFFF" vlink="#999999" alink="#666666">
+<center>
+<table border="0" width="80%" cellpadding="20px">
+<tr>
+<td colspan="2"><center><img src="images/etphonohome-header.png"></center></td>
+<tr>
+
+<tr>
+<td width=400px><center><img src="images/etphonohome-et.png"></center></td>
+<td>
+<font face="courier" color="#FFFFFF">
+<h1>Send a message into space!</h1>
+<h2>Click the button below to record your 30 second message, or call YOUR TROPO NUMBER</h2>
+</font>
+
+<center><font face="courier" color="#FFFFFF">--------> 
+<input id="call" type="button" disabled="true" value="Loading..." width="93px" height="28px"/>
+    <span id="status"></span>
+
+    <script>
+    $(document).ready(function(){
+      var phono = $.phono({
+        apiKey: "yourAPIKey",
+        onReady: function() {
+          $("#call").attr("disabled", false).val("E.T. Phono Home!");
+        }
+      });
+
+      $("#call").click(function() {
+        $("#call").attr("disabled", true).val("Busy");
+        phono.phone.dial("app:yourappID", {
+          onRing: function() {
+            $("#status").html("Ringing");
+          },
+          onAnswer: function() {
+            $("#status").html("Answered");
+          },
+          onHangup: function() {
+            $("#call").attr("disabled", false).val("Call");
+            $("#status").html("Hangup");
+          }
+        });
+      });
+    })
+    </script><--------</font>
+<center>
+<font face="courier" color="#FFFFFF">
+<br>
+This app was built by <a href="http://diggz.org">Diggz</a> as part of the 2013 <a href="http://spaceapps.org">International Space Apps 
+Challenge</a> in Krakow, Poland.  This uses technology by <a href="http://voxeolabs.com">Voxeo Labs</a>, including <a href="http://tropo.com">Tropo</a> (to receive and record the phone messages) and
+<a href="phono.com">Phono</a> (for calling via the web browser and WebRTC integration) messages will be stored for later transmission into outer space by a big giant transmitter like <a href="http://en.wikipedia.org/wiki/Arecibo_Observatory">this one</a>.
+
+</font>
+</td>
+</tr>
+<tr>
+<td colspan="2"><center><img src="images/etphonohomefooter.png"></center></td>
+<tr>
+
+</table>
+</center>
+
+
+
+    
+
+  </body>
+</html>
